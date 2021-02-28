@@ -1,0 +1,38 @@
+KEYMAPOPTS="us us"
+
+# Set hostname to alpine-test
+HOSTNAMEOPTS="-n $HOSTNAME"
+
+# Contents of /etc/network/interfaces
+INTERFACESOPTS="auto lo
+iface lo inet loopback
+
+auto eth0
+iface eth0 inet static
+        address $IP_ADDRESS
+        netmask 255.255.255.255
+        broadcast $BROADCAST
+        up ip route add $GATEWAY_IP dev eth0
+        up ip route add default via $GATEWAY_IP
+"
+
+# Search domain of example.com, Google public nameserver
+DNSOPTS="-d example.com 8.8.8.8 1.1.1.1"
+
+# Set timezone to UTC
+TIMEZONEOPTS="-z UTC"
+
+# set http/ftp proxy
+PROXYOPTS=""
+
+# Add a random mirror
+APKREPOSOPTS="-f"
+
+# Install Openssh
+SSHDOPTS="-c openssh"
+
+# Use openntpd
+NTPOPTS="-c openntpd"
+
+# Use /dev/sda as a data disk
+DISKOPTS="-m sys /dev/sda"
